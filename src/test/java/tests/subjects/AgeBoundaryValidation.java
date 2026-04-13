@@ -1,34 +1,32 @@
 package tests.subjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import bases.BaseTest;
 import pages.DashBoardPage;
 import pages.subjects.CreateSubjectPage;
+import pojo.Subject;
+import utilities.LoginHelper;
+import utilities.RandomDataUtil;
 
 public class AgeBoundaryValidation extends BaseTest{
 
-	@Test
+	@Test(groups = {"Regression", "Subjects"})
 	public void validateAge() {
 		logger.info("***Started Create new subject");
-		BaseTest.performLogin();
+		LoginHelper.performLogin();
 		new DashBoardPage(getDriver()).createSubject();
 		
-		CreateSubjectPage subject = new CreateSubjectPage(getDriver());
-		subject.setSubjectId("DIA-100");
-		subject.selectStudyById("DIA-204");
-		subject.selectGender("Male");
-		subject.setAge("0");//invalid age
-		subject.setEnrollmentDate("27-2-2026");
-		subject.saveSubject();
-		Assert.assertTrue(getDriver().findElement(By.xpath("//p[@class='form-error']")).isDisplayed());
+		CreateSubjectPage createSubjectPage = new CreateSubjectPage(getDriver());
+		Subject subject = RandomDataUtil.getSubjectData();
 		
-		subject.setAge("134");
-		subject.saveSubject();
-		WebElement error = getDriver().findElement(By.xpath("//p[@class='form-error']"));
-		Assert.assertTrue(error.isDisplayed(), error.getText());
+		createSubjectPage.setSubjectId(subject.getId());
+		createSubjectPage.selectStudy();
+		createSubjectPage.selectGender(subject.getGender());
+		createSubjectPage.setAge(prop.getProperty("subject.invalid.age"));
+		createSubjectPage.setEnrollmentDate(subject.getEnrollmentDate());
+		createSubjectPage.saveSubject();
+		Assert.assertTrue(createSubjectPage.isErrorDisplayed());
 	}
 }

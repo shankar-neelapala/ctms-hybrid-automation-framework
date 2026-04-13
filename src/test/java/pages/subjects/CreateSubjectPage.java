@@ -1,5 +1,8 @@
 package pages.subjects;
 
+import java.util.Random;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +25,10 @@ public class CreateSubjectPage extends BasePage{
 	@FindBy(xpath="//button[@id='saveSubjectBtn']") WebElement btnSaveSubject;
 	@FindBy(xpath="//button[normalize-space()='Cancel']") WebElement btnCancel;
 	
+	public boolean isErrorDisplayed() {
+		return driver.findElement(By.xpath("//p[@class='form-error']")).isDisplayed();
+	}
+	
 	public void clickCancel() {
 		btnCancel.click();
 	}
@@ -30,9 +37,12 @@ public class CreateSubjectPage extends BasePage{
 		txtSubjectId.sendKeys(name);
 	}
 	
-	public void selectStudyById(String id) {
-		Select option = new Select(drpStudy);
-		option.selectByContainsVisibleText(id);
+	public void selectStudy() {
+		Select select = new Select(drpStudy);
+		int num = select.getOptions().size();
+		int index = 1 + new Random().nextInt(num - 1);
+		select.selectByIndex(index);
+		
 	}
 	
 	public void selectGender(String gender) {
@@ -57,4 +67,5 @@ public class CreateSubjectPage extends BasePage{
 	public void saveSubject() {
 		btnSaveSubject.click();
 	}
+
 }

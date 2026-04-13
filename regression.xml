@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite">
+	<listeners>
+		<listener class-name="utilities.ExtentReportManager"></listener>
+	</listeners>
+	<parameter name="browser" value="chrome"></parameter>
+  <test name="Login Regression">
+    <classes>
+      <class name="tests.login.EmptyFieldsValidation"/>
+      <class name="tests.login.InvalidLogin"/>
+      <class name="tests.login.LoginDataDriven"/>
+    </classes>
+  </test>
+  <test name="Studies Regression">
+    <classes>
+      <class name="tests.studies.DuplicateStudyId"/>
+      <class name="tests.studies.SearchStudy"/>
+      <class name="tests.studies.DeleteStudy"/>
+    </classes>
+  </test>
+  <test name="Sites Regression">
+    <classes>
+      <class name="tests.sites.EditSiteStatus"/>
+      <class name="tests.sites.InvalidEmailValidation"/>
+      <class name="tests.sites.SearchSite"/>
+    </classes>
+  </test>
+  <test name="Subjects Regression">
+    <classes>
+      <class name="tests.subjects.AgeBoundaryValidation"/>
+      <class name="tests.subjects.CancelDelete"/>
+      <class name="tests.subjects.EditSubject"/>
+    </classes>
+  </test>
+</suite>

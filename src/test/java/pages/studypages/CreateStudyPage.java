@@ -1,9 +1,14 @@
 package pages.studypages;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import bases.BasePage;
 
@@ -21,6 +26,12 @@ public class CreateStudyPage extends BasePage{
 	@FindBy(xpath = "//input[@id='startDateInput']") WebElement startDate;
 	@FindBy(xpath = "//input[@id='endDateInput']") WebElement endDate;
 	@FindBy(xpath="//button[@id='saveStudyBtn']") WebElement btnSaveStudy;
+	
+	public WebElement getAlert() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='ctms-alert alert-danger']")));
+		return alert;
+	}
 	
 	public void setStudyId(String id) {
 		txtStudyId.sendKeys(id);

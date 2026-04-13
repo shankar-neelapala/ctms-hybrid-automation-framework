@@ -10,7 +10,7 @@ import utilities.DataProviders;
 
 public class RoleBasedLogin extends BaseTest{
 
-	@Test(dataProvider = "login-roles", dataProviderClass = DataProviders.class)
+	@Test(dataProvider = "login-roles", dataProviderClass = DataProviders.class, groups = {"smoke", "Login"})
 	public void roleBasedLogin(String email, String password, String expectedRole) {
 		logger.info("**Starting RoleBasedLogin***");
 		LoginPage lp = new LoginPage(getDriver());

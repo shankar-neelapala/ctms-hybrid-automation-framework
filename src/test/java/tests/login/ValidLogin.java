@@ -9,13 +9,13 @@ import pages.LoginPage;
 
 public class ValidLogin extends BaseTest{
 	
-	@Test
+	@Test(groups = {"smoke", "Login"})
 	public void validLogin() { 
 		logger.info("**Starting Valid Login***");
 		LoginPage lp = new LoginPage(getDriver());
 		logger.info("Providing Credentials");
-		lp.setEmail(prop.getProperty("email"));
-		lp.setPassword(prop.getProperty("password"));
+		lp.setEmail(prop.getProperty("valid.email"));
+		lp.setPassword(prop.getProperty("valid.password"));
 		lp.clickOnLogin();
 		
 		DashBoardPage dashboard = new DashBoardPage(getDriver());

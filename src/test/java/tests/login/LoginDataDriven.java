@@ -10,7 +10,7 @@ import utilities.DataProviders;
 
 public class LoginDataDriven extends BaseTest{
 
-	@Test(dataProvider = "login-data", dataProviderClass  = DataProviders.class)
+	@Test(dataProvider = "login-data", dataProviderClass  = DataProviders.class, groups = {"Regression", "Login"})
 	public void login(String email, String password, String expectedResult) {
 		logger.info("***Started LoginDataDrivenTC002***");
 		LoginPage lp = new LoginPage(getDriver());

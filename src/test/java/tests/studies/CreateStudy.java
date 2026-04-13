@@ -1,43 +1,42 @@
 package tests.studies;
 
-import java.time.Duration;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import bases.BaseTest;
 import pages.DashBoardPage;
 import pages.studypages.CreateStudyPage;
+import pages.studypages.StudiesPage;
+import pojo.Study;
+import utilities.Alertutil;
+import utilities.LoginHelper;
+import utilities.RandomDataUtil;
 
 public class CreateStudy extends BaseTest{
 
-	@Test
+	@Test(groups = {"Smoke", "Studies"})
 	public void createStudy() {
 		logger.info("***Started CreateStudy***");
-		BaseTest.performLogin();
+		LoginHelper.performLogin();
 		
 		DashBoardPage dashboard = new DashBoardPage(getDriver());
 		dashboard.createStudy();
 		logger.info("Entering study details");
-		CreateStudyPage study = new CreateStudyPage(getDriver());
-		study.setStudyId("DIA-204");
-		study.setStudyName("A Phase II Trial of Semaglutide in Type 2 Diabetes");
-		study.selectPhase("Phase II");
-		study.selectStatus("Active");
-		study.setSponser("Novo Nordisk");
-		study.setStartDate("27-2-2026");
-		study.setEndDate("27-3-2026");
-		study.saveStudy();
-		//System.out.println(getDriver().findElement(By.id("studiesTable")).getText());
-		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
-		WebElement alert = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctmsAlert")));
+		CreateStudyPage createStudyPage = new CreateStudyPage(getDriver());
+		
+		Study study = RandomDataUtil.getStudyData();
+		createStudyPage.setStudyId(study.getId());
+		createStudyPage.setStudyName(study.getStudyName());
+		createStudyPage.selectPhase(study.getPhase());
+		createStudyPage.setSponser(study.getSponser());
+		createStudyPage.setStartDate(study.getStartDate());
+		createStudyPage.setEndDate(study.getEndDate());
+		createStudyPage.saveStudy();
+		WebElement alert = Alertutil.getAlert(getDriver());
 		Assert.assertTrue(alert.getText().contains("created"));
 		
-		Assert.assertTrue(getDriver().findElement(By.id("studiesTable")).getText().contains("DIA-204"));
+		Assert.assertTrue(new StudiesPage(getDriver()).searchStudiesTableById(study.getId()));
 		logger.info("***Finished CreateStudy***");
 	}
 }
