@@ -8,12 +8,8 @@ A Java-based Selenium WebDriver end-to-end test automation framework for the **C
 
 - [Repository Structure](#repository-structure)
 - [Prerequisites](#prerequisites)
-- [Part 1 — Setting Up the CTMS Application](#part-1--setting-up-the-ctms-application)
-  - [1. Start MongoDB](#1-start-mongodb)
-  - [2. Start the Backend](#2-start-the-backend)
-  - [3. Start the Frontend](#3-start-the-frontend)
-  - [4. Default User Accounts](#4-default-user-accounts)
-- [Part 2 — Setting Up the Automation Project](#part-2--setting-up-the-automation-project)
+- [Prerequisite — CTMS Application](#prerequisite--ctms-application)
+- [Setting Up the Automation Project](#setting-up-the-automation-project)
   - [Tech Stack](#tech-stack)
   - [Project Structure](#project-structure)
   - [Installation](#installation)
@@ -93,63 +89,47 @@ Make sure the following are installed before doing anything else:
 
 ---
 
-## Part 1 — Setting Up the CTMS Application
+## Prerequisite — CTMS Application
 
-> **The automation tests cannot run without the CTMS app running locally.** Follow these steps first.
+> **The automation tests cannot run without the CTMS app running locally. Complete these steps before running any tests.**
 
-### 1. Start MongoDB
+**Download the CTMS application:** [ctms.zip](https://github.com/your-repo/ctms/releases/latest/download/ctms.zip)
 
-Make sure MongoDB is running on the default port:
+> *(Replace the link above with the actual download URL or path where `ctms.zip` is shared.)*
 
+Once downloaded, extract the zip and run the following commands:
+
+**Terminal 1 — Start MongoDB:**
 ```bash
 mongod
 ```
 
-Or if installed as a service, start it via your system's service manager. The backend connects to:
-
-```
-mongodb://localhost:27017/ctms_db
-```
-
-### 2. Start the Backend
-
+**Terminal 2 — Start the backend** (runs on http://localhost:5000):
 ```bash
 cd ctms/backend
 npm install
 npm run dev
 ```
 
-The backend starts on **http://localhost:5000**. On first startup, it automatically seeds the following default user accounts into the database.
-
-### 3. Start the Frontend
-
-Open a new terminal window:
-
+**Terminal 3 — Start the frontend** (runs on http://localhost:5173):
 ```bash
 cd ctms/frontend
 npm install
 npm run dev
 ```
 
-The frontend starts on **http://localhost:5173**. Open this URL in your browser and log in with `admin@ctms.com / Admin@123` to confirm the app is working.
+Keep all three running while executing the automation tests. On first backend startup, the following accounts are seeded automatically:
 
-> Both the backend and frontend **must remain running** throughout the automation test execution.
-
-### 4. Default User Accounts
-
-These accounts are seeded automatically when the backend starts for the first time:
-
-| Role        | Email               | Password     | Department              |
-|-------------|---------------------|--------------|-------------------------|
-| Admin       | admin@ctms.com      | Admin@123    | Administration          |
-| Doctor      | doctor@ctms.com     | Doctor@123   | Oncology                |
-| Doctor      | doctor2@ctms.com    | Doctor@123   | Cardiology              |
-| Nurse       | nurse@ctms.com      | Nurse@123    | Clinical Research       |
-| Coordinator | coord@ctms.com      | Coord@123    | Clinical Ops            |
+| Role        | Email               | Password    |
+|-------------|---------------------|-------------|
+| Admin       | admin@ctms.com      | Admin@123   |
+| Doctor      | doctor@ctms.com     | Doctor@123  |
+| Nurse       | nurse@ctms.com      | Nurse@123   |
+| Coordinator | coord@ctms.com      | Coord@123   |
 
 ---
 
-## Part 2 — Setting Up the Automation Project
+## Setting Up the Automation Project
 
 ### Tech Stack
 
