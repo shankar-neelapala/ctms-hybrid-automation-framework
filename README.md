@@ -6,7 +6,6 @@ A Java-based Selenium WebDriver end-to-end test automation framework for the **C
 
 ## Table of Contents
 
-- [Repository Structure](#repository-structure)
 - [Prerequisites](#prerequisites)
 - [Prerequisite — CTMS Application](#prerequisite--ctms-application)
 - [Setting Up the Automation Project](#setting-up-the-automation-project)
@@ -29,49 +28,6 @@ A Java-based Selenium WebDriver end-to-end test automation framework for the **C
 - [Framework Architecture](#framework-architecture)
 - [CTMS Application — Module Reference](#ctms-application--module-reference)
 
----
-
-## Repository Structure
-
-```
-/
-├── ctms/                          # ⚠️ PREREQUISITE — The CTMS web application
-│   ├── backend/                   # Node.js + Express REST API
-│   │   ├── models/                # Mongoose models (User, Study, Site, Subject, Patient, Appointment)
-│   │   ├── routes/                # API route handlers
-│   │   ├── middleware/            # JWT authentication middleware
-│   │   ├── server.js              # Entry point — connects MongoDB, seeds users, starts server
-│   │   ├── package.json
-│   │   └── .env                   # Environment config (port, MongoDB URI, JWT secret)
-│   └── frontend/                  # React + Vite frontend
-│       ├── src/
-│       │   ├── components/        # Auth, Dashboard, Studies, Sites, Subjects, Patients, Appointments, Users
-│       │   ├── context/           # AuthContext (JWT token management)
-│       │   ├── api/               # Axios API client
-│       │   └── App.jsx            # Root component with route definitions
-│       ├── index.html
-│       └── package.json
-│
-└── com.openctms.demo/             # Selenium automation framework
-    ├── src/test/java/
-    │   ├── bases/                 # BaseTest (WebDriver setup/teardown)
-    │   ├── pages/                 # Page Object classes
-    │   ├── pojo/                  # Data model classes (Study, Site, Subject, Patient)
-    │   ├── tests/                 # Test classes grouped by module
-    │   └── utilities/             # Helpers (RandomDataUtil, LoginHelper, ExtentReportManager, etc.)
-    ├── src/test/resources/
-    │   ├── config.properties      # App URL, credentials, test data IDs
-    │   └── log4j2.xml
-    ├── testdata/                  # Excel files for data-driven tests
-    │   ├── logindata.xlsx
-    │   └── roles.xlsx
-    ├── master.xml                 # Full suite (smoke + regression)
-    ├── smoke.xml
-    ├── regression.xml
-    ├── cross-browser-testing.xml
-    ├── data-driven-testing.xml
-    └── pom.xml
-```
 
 ---
 
@@ -93,9 +49,7 @@ Make sure the following are installed before doing anything else:
 
 > **The automation tests cannot run without the CTMS app running locally. Complete these steps before running any tests.**
 
-**Download the CTMS application:** [ctms.zip](https://github.com/your-repo/ctms/releases/latest/download/ctms.zip)
-
-> *(Replace the link above with the actual download URL or path where `ctms.zip` is shared.)*
+**Download the CTMS application:** [ctms.zip](https://github.com/shankar-neelapala/Clinical-Trail-Management-System-MERN.git)
 
 Once downloaded, extract the zip and run the following commands:
 
